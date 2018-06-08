@@ -1,17 +1,12 @@
 language: none
 os:
   - osx
-jobs:
-  include:
-    - stage: Install Gerbera
-      script:
-        - brew tap gerbera/homebrew-gerbera
-        - brew install duktape
-        - brew install libupnp
-        - brew upgrade --build-from-source gerbera/gerbera/libupnp
-        - brew install gerbera
-    - stage: Test Gerbera
-      script:
-        - brew test duktape
-        - brew test libupnp
-        - brew test gerbera
+script:
+  - brew tap gerbera/homebrew-gerbera
+  - brew install duktape
+  - brew test duktape
+  - brew install libupnp
+  - brew upgrade --build-from-source gerbera/gerbera/libupnp
+  - brew test libupnp
+  - brew install gerbera
+  - brew test gerbera
