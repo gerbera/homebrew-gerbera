@@ -3,19 +3,15 @@ os:
   - osx
 jobs:
   include:
-    - stage: Install Duktape
+    - stage: Install Gerbera
       script:
         - brew tap gerbera/homebrew-gerbera
         - brew install duktape
-        - brew test duktape
-    - stage: Install Libupnp
-      script:
         - brew install libupnp
         - brew upgrade --build-from-source gerbera/gerbera/libupnp
-        - brew test libupnp
-    - stage: Install Gerbera
-      script:
         - brew install gerbera
+    - stage: Test Gerbera
+      script:
+        - brew test duktape
+        - brew test libupnp
         - brew test gerbera
-
-
