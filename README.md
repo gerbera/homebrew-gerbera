@@ -1,5 +1,7 @@
 # Homebrew Tap for Gerbera Media Server
 
+[![Build Status](https://travis-ci.org/gerbera/homebrew-gerbera.svg?branch=master)](https://travis-ci.org/gerbera/homebrew-gerbera)
+
 This repository holds the relevant homebrew formulas to install the Gerbera Media Server.
 
 ## Using this Homebrew Tap
