@@ -5,5 +5,5 @@ script:
   - brew tap gerbera/homebrew-gerbera
   - brew install gerbera
   - brew test duktape
-  - brew test libupnp
+  - brew test gerbera/gerbera/libupnp
   - brew test gerbera
