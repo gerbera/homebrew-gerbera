@@ -12,7 +12,7 @@ class Gerbera < Formula
   depends_on "libmagic"
   depends_on "gerbera/gerbera/libupnp"
   depends_on "lzlib"
-  depends_on "mysql"
+  #depends_on "mysql"
   depends_on "ossp-uuid"
   depends_on "taglib"
 
