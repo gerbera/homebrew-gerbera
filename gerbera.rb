@@ -10,9 +10,8 @@ class Gerbera < Formula
   depends_on "ffmpegthumbnailer"
   depends_on "libexif"
   depends_on "libmagic"
-  depends_on "libupnp"
+  depends_on "gerbera/gerbera/libupnp"
   depends_on "lzlib"
-  depends_on "mysql"
   depends_on "ossp-uuid"
   depends_on "taglib"
 
@@ -31,7 +30,7 @@ class Gerbera < Formula
       args << "-DCMAKE_CXX_COMPILER=/usr/bin/clang++"
       args << "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}"
       args << "-DWITH_FFMPEGTHUMBNAILER=1"
-      args << "-DWITH_MYSQL=1"
+      args << "-DWITH_MYSQL=0"
 
       system "cmake", "..", *args
       system "make", "install"
