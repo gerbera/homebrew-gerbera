@@ -3,10 +3,7 @@ os:
   - osx
 script:
   - brew tap gerbera/homebrew-gerbera
-  - brew install duktape
-  - brew test duktape
-  - brew install libupnp
-  - brew upgrade --build-from-source gerbera/gerbera/libupnp
-  - brew test libupnp
   - brew install gerbera
+  - brew test duktape
+  - brew test gerbera/gerbera/libupnp
   - brew test gerbera
