@@ -1,23 +1,8 @@
 language: none
 os:
   - osx
-<<<<<<< HEAD
     osx_image: xcode9.4 # Xcode 9.4.1	OS X 10.13
-=======
-  - osx_image: xcode9.4 # Xcode 9.4.1	OS X 10.13
->>>>>>> efb47c9dc9d2d9fe5feba406f49f9c9f87beb900
 script:
   - brew tap gerbera/homebrew-gerbera
   - brew install gerbera
   - brew test gerbera
-  #- brew install duktape
-  #- brew test duktape
-  #- brew install libupnp
-  #- brew upgrade --build-from-source gerbera/gerbera/libupnp
-  #- brew test libupnp
-  #- brew install gerbera
-  #- brew test gerbera
-<<<<<<< HEAD
-=======
- 
->>>>>>> efb47c9dc9d2d9fe5feba406f49f9c9f87beb900
