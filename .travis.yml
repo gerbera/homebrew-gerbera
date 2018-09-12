@@ -1,7 +1,56 @@
-language: none
+# Inspired from the .travis.yml in GitHub repos
+# davidchall/homebrew-hep and touist/homebrew-touist
+language: ruby
+cache:
+  directories:
+    - $HOME/Library/Caches/Homebrew
+
 os:
   - osx
+matrix:
+  include:
+    - osx_image: xcode9.4
+      env: OSX=10.13
+    - osx_image: xcode9.2
+      env: OSX=10.12
+
+before_install:
+  # IMPORTANT STEP: link the tap inside brew to our current travis-cloned tap
+  # Step: 1) create the intermediate folders <user>/<repo> so that
+  # we can 2) remove <repo> and 3) replace it with a sym link
+  # that will point to the travis build folder.
+  # If we don't do that, the tap be cloned using the default master
+  # branch, and thus we cannot test our tap at the current pushed commit.
+  # We also need to unshallow in 4) because sometimes travis does not
+  # clone thouroughly but we need a deep clone.
+  - export TRAVIS_COMMIT="$(git rev-parse --verify -q HEAD)"
+  # 4)
+  - if [ -f ".git/shallow" ]; then
+      travis_retry git fetch --unshallow;
+    fi
+  - HOMEBREW_REPOSITORY="$(brew --repo)"
+  - sudo chown -R "$USER" "$HOMEBREW_REPOSITORY"
+  - git -C "$HOMEBREW_REPOSITORY" reset --hard origin/master
+  - brew update || brew update
+  - HOMEBREW_TAP_DIR="$(brew --repo "$TRAVIS_REPO_SLUG")"
+  - mkdir -p "$HOMEBREW_TAP_DIR" # 1)
+  - rm -rf "$HOMEBREW_TAP_DIR" # 2)
+  - ln -s "$PWD" "$HOMEBREW_TAP_DIR" # 3)
+  - export HOMEBREW_DEVELOPER="1"
+  # - export HOMEBREW_BINTRAY_USER="davidchall"
+  # - export TAP_BOTTLE_DOMAIN="https://dl.bintray.com/davidchall"
+  - ulimit -n 1024
+
 script:
-  - brew tap gerbera/homebrew-gerbera
-  - brew install gerbera
-  - brew test gerbera
+  - brew tap davidchall/test-bot
+  - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
+      brew test-bot --ci-testing;
+    else
+      brew test-bot --ci-pr;
+    fi
+
+# after_success:
+#   - if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
+#       brew update;
+#       brew test-bot --ci-upload --git-name=davidchall --git-email=dhcrawley@gmail.com --bintray-org=davidchall;
+#     fi
