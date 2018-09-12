@@ -1,7 +1,7 @@
 class Duktape < Formula
   desc "Embeddable Javascript engine with compact footprint"
-  homepage "http://duktape.org"
-  url "http://duktape.org/duktape-2.2.1.tar.xz"
+  homepage "https://duktape.org"
+  url "https://duktape.org/duktape-2.2.1.tar.xz"
   sha256 "3abe2eed2553305262b892c98f550bb1a94cf4fd73b51dc5c176fe08e7ade7f2"
 
   def install
