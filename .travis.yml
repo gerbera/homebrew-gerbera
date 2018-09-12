@@ -24,8 +24,9 @@ before_install:
   # We also need to unshallow in 4) because sometimes travis does not
   # clone thouroughly but we need a deep clone.
   - export TRAVIS_COMMIT="$(git rev-parse --verify -q HEAD)"
+  # 4)
   - if [ -f ".git/shallow" ]; then
-      travis_retry git fetch --unshallow; # 4)
+      travis_retry git fetch --unshallow;
     fi
   - HOMEBREW_REPOSITORY="$(brew --repo)"
   - sudo chown -R "$USER" "$HOMEBREW_REPOSITORY"
