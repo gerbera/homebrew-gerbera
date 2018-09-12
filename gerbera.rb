@@ -5,7 +5,7 @@ class Gerbera < Formula
   sha256 "a64fe5820aced590bcdc22600596dc8a41c0baf68d7c0ec5baf7a561ade820df"
 
   depends_on "cmake" => :build
-  depends_on "duktape"
+  depends_on "gerbera/gerbera/duktape"
   depends_on "ffmpeg"
   depends_on "ffmpegthumbnailer"
   depends_on "libexif"
