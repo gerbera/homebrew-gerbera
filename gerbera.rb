@@ -1,6 +1,6 @@
 class Gerbera < Formula
   desc "UPnP Media Server for 2018 (Based on MediaTomb)"
-  homepage "https://gerbera.io"
+  homepage "https://github.com/gerbera/gerbera"
   url "https://github.com/gerbera/gerbera/archive/v1.2.0.tar.gz"
   sha256 "a64fe5820aced590bcdc22600596dc8a41c0baf68d7c0ec5baf7a561ade820df"
 
