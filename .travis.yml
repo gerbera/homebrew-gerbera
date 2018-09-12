@@ -41,25 +41,16 @@ before_install:
   - rm -rf "$HOMEBREW_TAP_DIR" # 2)
   - ln -s "$PWD" "$HOMEBREW_TAP_DIR" # 3)
   - export HOMEBREW_DEVELOPER="1"
-  # - export HOMEBREW_BINTRAY_USER="davidchall"
-  # - export TAP_BOTTLE_DOMAIN="https://dl.bintray.com/davidchall"
   - ulimit -n 1024
 
 script:
-  - brew tap davidchall/test-bot
+  - brew test-bot
   - if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
       brew test-bot --ci-testing;
     else
       brew test-bot --ci-pr;
     fi
 
-# after_success:
-#   - if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
-#       brew update;
-#       brew test-bot --ci-upload --git-name=davidchall --git-email=dhcrawley@gmail.com --bintray-org=davidchall;
-#     fi
-
-
 before_cache:
   # Scrub cache so that travis only caches stuff for installed formulae.
-  - brew cleanup -s
+  - brew cleanup -
