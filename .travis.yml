@@ -1,17 +1,21 @@
 # Inspired from the .travis.yml in GitHub repos
 # davidchall/homebrew-hep and touist/homebrew-touist
 language: ruby
+rvm: system
+
 cache:
   directories:
     - $HOME/Library/Caches/Homebrew
+    - /usr/local/Homebrew/Library/Homebrew/vendor/bundle
+    - /usr/local/Homebrew/Library/Homebrew/vendor/portable-ruby
 
-os:
-  - osx
 matrix:
   include:
-    - osx_image: xcode9.4
+    - os: osx
+      osx_image: xcode9.4
       env: OSX=10.13
-    - osx_image: xcode9.2
+    - os: osx
+      osx_image: xcode9.2
       env: OSX=10.12
 
 before_install:
@@ -31,6 +35,7 @@ before_install:
   - HOMEBREW_REPOSITORY="$(brew --repo)"
   - sudo chown -R "$USER" "$HOMEBREW_REPOSITORY"
   - git -C "$HOMEBREW_REPOSITORY" reset --hard origin/master
+  - brew help # trigger vendored ruby installation
   - brew update || brew update
   - HOMEBREW_TAP_DIR="$(brew --repo "$TRAVIS_REPO_SLUG")"
   - mkdir -p "$HOMEBREW_TAP_DIR" # 1)
@@ -54,3 +59,8 @@ script:
 #       brew update;
 #       brew test-bot --ci-upload --git-name=davidchall --git-email=dhcrawley@gmail.com --bintray-org=davidchall;
 #     fi
+
+
+before_cache:
+  # Scrub cache so that travis only caches stuff for installed formulae.
+  - brew cleanup -s
