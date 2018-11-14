@@ -26,7 +26,7 @@ class Gerbera < Formula
       args << "-DWITH_SYSTEMD=0"
       args << "-DWITH_INOTIFY=0"
       args << "-DCMAKE_FIND_FRAMEWORK=LAST"
-      args << "-DCMAKE_CXX_FLAGS=\"-stdlib=libstdc++\""
+      args << "-DCMAKE_CXX_FLAGS=\"-stdlib=libc++\""
       args << "-DCMAKE_CXX_COMPILER=/usr/bin/clang++"
       args << "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}"
       args << "-DWITH_FFMPEGTHUMBNAILER=1"
