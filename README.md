@@ -18,7 +18,7 @@ $ brew tap gerbera/homebrew-gerbera
 Check that you have the `gerbera/gerbera` tap.
 
 ```
-$ brew tap
+$ brew tap 
 ==> Auto-updated Homebrew!
 caskformula/caskformula
 gerbera/gerbera
@@ -26,7 +26,7 @@ homebrew/cask
 homebrew/core
 ```
 
-## Install and lauch Gerbera
+## Install and launch Gerbera
 
 ```
 brew install gerbera
@@ -36,4 +36,4 @@ gerbera &
 sleep 5 ; open -a Safari http://0.0.0.0:49152/
 ```
 
-Use gerbera/gerbera to connect.
+Use gerbera/gerbera for login and password to connect.
