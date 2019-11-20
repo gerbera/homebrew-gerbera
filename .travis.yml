@@ -2,6 +2,7 @@ language: none
 os:
   - osx
 script:
+  - brew update
   - brew tap gerbera/homebrew-gerbera
   - brew install gerbera
   - brew test gerbera
