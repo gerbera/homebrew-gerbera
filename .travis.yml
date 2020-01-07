@@ -1,6 +1,7 @@
 language: none
 os:
   - osx
+osx_image: xcode11.3
 script:
   - brew update
   - brew tap gerbera/homebrew-gerbera
