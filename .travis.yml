@@ -1,8 +1,10 @@
 language: none
 os:
   - osx
+osx_image: xcode11.3
 script:
   - brew update
+  - brew unlink python@2 # Stop homebrew complaining about python
   - brew tap gerbera/homebrew-gerbera
   - brew install gerbera
   - brew test gerbera
