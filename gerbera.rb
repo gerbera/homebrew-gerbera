@@ -10,6 +10,7 @@ class Gerbera < Formula
   depends_on "ffmpegthumbnailer"
   depends_on "libexif"
   depends_on "libmagic"
+  depends_on "libmatroska"
   depends_on "gerbera/gerbera/libupnp"
   depends_on "lzlib"
   depends_on "ossp-uuid"
