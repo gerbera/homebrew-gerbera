@@ -6,12 +6,7 @@ class Duktape < Formula
 
   def install
     inreplace "Makefile.sharedlibrary" do |s|
-      s.gsub! "-soname", "-install_name"
       s.gsub! %r{\/usr\/local}, prefix
-      s.gsub! "libduktape.so.$(REAL_VERSION)", "libduktape.$(REAL_VERSION).so"
-      s.gsub! "libduktaped.so.$(REAL_VERSION)", "libduktaped.$(REAL_VERSION).so"
-      s.gsub! "libduktape.so.$(SONAME_VERSION)", "libduktape.$(SONAME_VERSION).so"
-      s.gsub! "libduktaped.so.$(SONAME_VERSION)", "libduktaped.$(SONAME_VERSION).so"
     end
     system "make", "-f", "Makefile.sharedlibrary"
     mkdir lib
