@@ -1,7 +1,7 @@
 class Libupnp < Formula
   desc "The portable Universal Plug and Play (UPnP) SDK"
   homepage "https://github.com/pupnp/pupnp/"
-  url "https://downloads.sourceforge.net/project/pupnp/pupnp/libUPnP%201.8.6/libupnp-1.8.6.tar.bz2"
+  url "https://downloads.sourceforge.net/project/pupnp/pupnp/libupnp-1.8.6/libupnp-1.8.6.tar.bz2"
   sha256 "65faf240f8ccee50cc0e7fe7fb21dcd79f743fc227a9b652b091f50f6956c2c7"
 
   option "without-ipv6", "Disable IPv6 support"
