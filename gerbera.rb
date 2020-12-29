@@ -1,8 +1,8 @@
 class Gerbera < Formula
   desc "UPnP Media Server for 2020"
   homepage "https://gerbera.io"
-  url "https://github.com/gerbera/gerbera/archive/v1.6.1.tar.gz"
-  sha256 "9bb119ee422c8e7a053c309256215a8899dfd6707f6b93496e6facea7978ac7c"
+  url "https://github.com/gerbera/gerbera/archive/v1.6.4.tar.gz"
+  sha256 "cbe7ea78977db8c02fcca1759ed149f199a590afaf4a6d21ffcca8623d1a0cc5"
 
   depends_on "cmake" => :build
   depends_on "duktape"
@@ -14,6 +14,8 @@ class Gerbera < Formula
   depends_on "libupnp"
   depends_on "lzlib"
   depends_on "ossp-uuid"
+  depends_on "pugixml"
+  depends_on "spdlog"
   depends_on "taglib"
 
   def install
