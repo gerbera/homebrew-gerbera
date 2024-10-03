@@ -17,6 +17,7 @@ class Gerbera < Formula
   depends_on "pugixml"
   depends_on "spdlog"
   depends_on "taglib"
+  depends_on "exiv2"
 
   def install
     mkdir "build" do
