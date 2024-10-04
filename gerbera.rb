@@ -1,7 +1,7 @@
 class Gerbera < Formula
   desc "UPnP Media Server for 2024"
   homepage "https://gerbera.io"
-  url "https://github.com/gerbera/gerbera/archive/v2.3.0.tar.gz"
+  url "https://github.com/gerbera/gerbera/refs/tags/v2.3.0"
   sha256 "c9f7956d9e94a9b8ded7de809ba8496ad1a2279b624ab121652dff2a28a1a69e"
 
   depends_on "cmake" => :build
@@ -16,8 +16,8 @@ class Gerbera < Formula
   depends_on "ossp-uuid"
   depends_on "pugixml"
   depends_on "spdlog"
-  depends_on "taglib"
   depends_on "exiv2"
+  depends_on "taglib"
 
   def install
     mkdir "build" do
