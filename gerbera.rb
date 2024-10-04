@@ -6,6 +6,7 @@ class Gerbera < Formula
 
   depends_on "cmake" => :build
   depends_on "duktape"
+  depends_on "exiv2"
   depends_on "ffmpeg"
   depends_on "ffmpegthumbnailer"
   depends_on "libexif"
@@ -16,7 +17,6 @@ class Gerbera < Formula
   depends_on "ossp-uuid"
   depends_on "pugixml"
   depends_on "spdlog"
-  depends_on "exiv2"
   depends_on "taglib"
 
   def install
