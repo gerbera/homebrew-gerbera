@@ -27,7 +27,7 @@ class Gerbera < Formula
       args << "-DWITH_TAGLIB=YES"
       args << "-DWITH_AVCODEC=YES"
       args << "-DWITH_EXIF=YES"
-      args << "-DWITH_EXIV2=YES"
+      args << "-DWITH_EXIV2=NO"
       args << "-DWITH_SYSTEMD=NO"
       args << "-DWITH_INOTIFY=NO"
       args << "-DWITH_MYSQL=NO"
