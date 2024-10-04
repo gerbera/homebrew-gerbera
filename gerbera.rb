@@ -1,8 +1,8 @@
 class Gerbera < Formula
   desc "UPnP Media Server for 2024"
   homepage "https://gerbera.io"
-  url "https://github.com/gerbera/gerbera/releases/tag/v2.3.0"
-  sha256 "3019908328e5fca317fe182661dd2c287795f482128bf8350c6a907105f52938"
+  url "https://github.com/gerbera/gerbera/archive/refs/tags/v2.3.0.tar.gz"
+  sha256 "c9f7956d9e94a9b8ded7de809ba8496ad1a2279b624ab121652dff2a28a1a69e"
 
   depends_on "cmake" => :build
   depends_on "duktape"
