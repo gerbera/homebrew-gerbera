@@ -1,5 +1,5 @@
 class Gerbera < Formula
-  desc "UPnP Media Server for 2024"
+  desc "UPnP Media Server for 2025"
   homepage "https://gerbera.io"
   url "https://github.com/gerbera/gerbera/archive/refs/tags/v2.4.0.tar.gz"
   sha256 "f7b6fc5f9cb22c72d84b474a1a5027d110435bcfa4db0b3e770a62ecbbbdd58b"
