@@ -27,6 +27,9 @@ class Gerbera < Formula
   patch :p1, :DATA
 
   def install
+    system "which pkg-config"
+    system "/opt/local/bin/pkg-config"
+    system "/opt/homebrew/bin/pkg-config"
     system "ls", "-l", "$(which pkg-config)"
     mkdir "build" do
       grb_pkg_config_path = ENV["PKG_CONFIG_PATH"]
