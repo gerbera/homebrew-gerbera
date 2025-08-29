@@ -27,7 +27,7 @@ class Gerbera < Formula
   patch :p1, :DATA
 
   def install
-    system "which", "-a" , "pkg-config"
+    system "which", "-a", "pkg-config"
     system "/opt/homebrew/Library/Homebrew/shims/mac/super/pkg-config"
     system "ls", "-l", "$(pkg-config)"
     mkdir "build" do
