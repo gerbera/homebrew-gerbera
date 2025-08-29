@@ -25,7 +25,7 @@ class Gerbera < Formula
   # Embedded (__END__) patches are declared like so:
   patch :DATA
   patch :p1, :DATA
-  
+
   def install
     mkdir "build" do
       # grb_pkg_config_path = ENV["PKG_CONFIG_PATH"]
