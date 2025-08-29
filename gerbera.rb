@@ -7,6 +7,7 @@ class Gerbera < Formula
   depends_on "cmake" => :build
   depends_on "duktape"
   depends_on "exiv2"
+  depends_on "fmt"
   depends_on "ffmpeg"
   depends_on "ffmpegthumbnailer"
   depends_on "libexif"
@@ -17,22 +18,14 @@ class Gerbera < Formula
   depends_on "ossp-uuid"
   depends_on "pugixml"
   depends_on "jsoncpp"
+  depends_on "icu4c"
   depends_on "spdlog"
   depends_on "taglib"
 
   def install
     mkdir "build" do
       args = std_cmake_args
-      args << "-DWITH_CURL=YES"
-      args << "-DWITH_JS=YES"
-      args << "-DWITH_TAGLIB=YES"
-      args << "-DWITH_AVCODEC=YES"
-      args << "-DWITH_EXIF=YES"
-      args << "-DWITH_EXIV2=NO"
-      args << "-DWITH_SYSTEMD=NO"
-      args << "-DWITH_INOTIFY=NO"
-      args << "-DWITH_MYSQL=NO"
-      args << "-DWITH_FFMPEGTHUMBNAILER=YES"
+      args << "--preset=macos"
       args << "-DCMAKE_FIND_FRAMEWORK=LAST"
       args << "-DCMAKE_CXX_FLAGS=\"-stdlib=libc++\""
       args << "-DCMAKE_CXX_COMPILER=/usr/bin/clang++"
