@@ -31,6 +31,8 @@ class Gerbera < Formula
       args << "-DCMAKE_CXX_FLAGS=\"-stdlib=libc++\""
       args << "-DCMAKE_CXX_COMPILER=/usr/bin/clang++"
       args << "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}"
+      args << "-DCMAKE_PREFIX_PATH=/opt/homebrew/opt/libupnp"
+      args << "-DCMAKE_PKG_CONFIG_PC_LIB_DIRS=/opt/homebrew/opt/libupnp/lib/pkgconfig"
 
       system "cmake", "..", *args
       system "make", "install"
