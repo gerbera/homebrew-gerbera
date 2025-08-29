@@ -42,6 +42,7 @@ class Gerbera < Formula
       args = std_cmake_args
       args << "--preset=macos"
       args << "-DWITH_ICU=NO"
+      args << "-DWITH_TESTS=NO"
       args << "-DCMAKE_FIND_FRAMEWORK=LAST"
       args << "-DCMAKE_CXX_FLAGS=\"-stdlib=libc++\""
       args << "-DCMAKE_CXX_COMPILER=/usr/bin/clang++"
