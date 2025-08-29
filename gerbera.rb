@@ -28,10 +28,10 @@ class Gerbera < Formula
   
   def install
     mkdir "build" do
-      #grb_pkg_config_path = ENV["PKG_CONFIG_PATH"]
-      #grb_cmake_prefix_path = ENV["CMAKE_PREFIX_PATH"]
-      #ENV["CMAKE_PKG_CONFIG_PC_LIB_DIRS"] = "/opt/homebrew/opt/libupnp/lib/pkgconfig:#{grb_pkg_config_path}"
-      #ENV["CMAKE_PREFIX_PATH"] = "#{grb_cmake_prefix_path}:/opt/homebrew/opt/libupnp"
+      # grb_pkg_config_path = ENV["PKG_CONFIG_PATH"]
+      # grb_cmake_prefix_path = ENV["CMAKE_PREFIX_PATH"]
+      # ENV["CMAKE_PKG_CONFIG_PC_LIB_DIRS"] = "/opt/homebrew/opt/libupnp/lib/pkgconfig:#{grb_pkg_config_path}"
+      # ENV["CMAKE_PREFIX_PATH"] = "#{grb_cmake_prefix_path}:/opt/homebrew/opt/libupnp"
 
       args = std_cmake_args
       args << "--preset=macos"
