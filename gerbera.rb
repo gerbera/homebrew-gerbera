@@ -15,6 +15,7 @@ class Gerbera < Formula
   depends_on "jsoncpp"
   depends_on "libexif"
   depends_on "libmagic"
+  depends_on "libebml"
   depends_on "libmatroska"
   depends_on "libupnp"
   depends_on "lzlib"
@@ -28,8 +29,6 @@ class Gerbera < Formula
   patch :p1, :DATA
 
   def install
-    system "/opt/homebrew/Library/Homebrew/shims/mac/super/pkg-config", "--libs", "libupnp"
-    system "/opt/homebrew/Library/Homebrew/shims/mac/super/pkg-config", "--cflags", "libupnp"
     mkdir "build" do
       grb_pkg_config_path = ENV["PKG_CONFIG_PATH"]
       grb_cmake_prefix_path = ENV["CMAKE_PREFIX_PATH"]
@@ -82,6 +81,26 @@ index 89d4dfe9f..b05467b3d 100644
      # LibUPnP official target since 1.16 (Lib version 18)
      # This will prefer the provided UPNPConfig.cmake if found, if not, it will fall back our FindUPNP.cmake
      find_package(UPNP ${REQ_UPNP_VERSION} QUIET)
+@@ -755,19 +767,19 @@ endif()
+ # ICU for C/C++
+ #
+ if(WITH_ICU)
++    if(CMAKE_SYSTEM_NAME MATCHES "Darwin")
++        # Determine processor type as there are different paths for "brew" installation.
++        if (CMAKE_SYSTEM_PROCESSOR MATCHES "arm64") # "arm64" -> Apple Silicon
++                set(ENV{PKG_CONFIG_PATH} "$ENV{PKG_CONFIG_PATH}:/opt/homebrew/opt/icu4c/lib/pkgconfig")
++                list(APPEND CMAKE_PREFIX_PATH "/opt/homebrew/opt/icu4c")
++                list(APPEND CMAKE_PKG_CONFIG_PC_LIB_DIRS "/opt/homebrew/opt/icu4c/lib/pkgconfig")
++        else() # "x86_64" -> Intel (CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64")
++                set(ENV{PKG_CONFIG_PATH} "$ENV{PKG_CONFIG_PATH}:/usr/local/opt/icu4c/lib/pkgconfig")
++                list(APPEND CMAKE_PREFIX_PATH "/usr/local/opt/icu4c")
++                list(APPEND CMAKE_PKG_CONFIG_PC_LIB_DIRS "/usr/local/opt/icu4c/lib/pkgconfig")
++        endif()
++    endif()
++    find_package(ICU REQUIRED COMPONENTS i18n io uc)
+     target_include_directories(libgerbera PUBLIC ${ICU_INCLUDE_DIRS})
+     target_link_libraries(libgerbera PUBLIC ${ICU_LIBRARIES})
+     target_compile_definitions(libgerbera PUBLIC HAVE_ICU)
 @@ -829,13 +847,15 @@ if(BUILD_CHANGELOG)
      )
  endif()
