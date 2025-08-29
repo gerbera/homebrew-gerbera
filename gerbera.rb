@@ -23,7 +23,7 @@ class Gerbera < Formula
   depends_on "taglib"
 
   # Embedded (__END__) patches are declared like so:
-  patch :DATA
+  # patch :DATA
   patch :p1, :DATA
 
   def install
