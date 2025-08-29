@@ -81,11 +81,11 @@ index 89d4dfe9f..b05467b3d 100644
      # LibUPnP official target since 1.16 (Lib version 18)
      # This will prefer the provided UPNPConfig.cmake if found, if not, it will fall back our FindUPNP.cmake
      find_package(UPNP ${REQ_UPNP_VERSION} QUIET)
-@@ -755,19 +767,19 @@ endif()
- # ICU for C/C++
+@@ -756,10 +768,19 @@
  #
  if(WITH_ICU)
-+    if(CMAKE_SYSTEM_NAME MATCHES "Darwin")
+     if(CMAKE_SYSTEM_NAME MATCHES "Darwin")
+-         set(ENV{PKG_CONFIG_PATH} "$ENV{PKG_CONFIG_PATH}:/usr/local/opt/icu4c/lib/pkgconfig")
 +        # Determine processor type as there are different paths for "brew" installation.
 +        if (CMAKE_SYSTEM_PROCESSOR MATCHES "arm64") # "arm64" -> Apple Silicon
 +                set(ENV{PKG_CONFIG_PATH} "$ENV{PKG_CONFIG_PATH}:/opt/homebrew/opt/icu4c/lib/pkgconfig")
@@ -96,11 +96,13 @@ index 89d4dfe9f..b05467b3d 100644
 +                list(APPEND CMAKE_PREFIX_PATH "/usr/local/opt/icu4c")
 +                list(APPEND CMAKE_PKG_CONFIG_PC_LIB_DIRS "/usr/local/opt/icu4c/lib/pkgconfig")
 +        endif()
-+    endif()
-+    find_package(ICU REQUIRED COMPONENTS i18n io uc)
-     target_include_directories(libgerbera PUBLIC ${ICU_INCLUDE_DIRS})
+     endif()
+     find_package(ICU REQUIRED COMPONENTS i18n io uc)
+-    # pkg_check_modules(ICU REQUIRED icu-i18n icu-uc icu-io)
++    target_include_directories(libgerbera PUBLIC ${ICU_INCLUDE_DIRS})
      target_link_libraries(libgerbera PUBLIC ${ICU_LIBRARIES})
      target_compile_definitions(libgerbera PUBLIC HAVE_ICU)
+ endif()
 @@ -829,13 +847,15 @@ if(BUILD_CHANGELOG)
      )
  endif()
