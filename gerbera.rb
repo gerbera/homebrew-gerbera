@@ -82,3 +82,24 @@ index 89d4dfe9f..b05467b3d 100644
      # LibUPnP official target since 1.16 (Lib version 18)
      # This will prefer the provided UPNPConfig.cmake if found, if not, it will fall back our FindUPNP.cmake
      find_package(UPNP ${REQ_UPNP_VERSION} QUIET)
+@@ -829,13 +847,15 @@ if(BUILD_CHANGELOG)
+     )
+ endif()
+
+-set(BASH_COMPLETION_DIR "/usr/share/bash-completion/completions")
++if(NOT CMAKE_SYSTEM_NAME MATCHES "Darwin")
++    set(BASH_COMPLETION_DIR "/usr/share/bash-completion/completions")
+
+-install(FILES
+-        scripts/gerbera-completion.sh
+-        DESTINATION "${BASH_COMPLETION_DIR}"
+-        RENAME gerbera
+-)
++    install(FILES
++            scripts/gerbera-completion.sh
++            DESTINATION "${BASH_COMPLETION_DIR}"
++            RENAME gerbera
++    )
++endif()
+
+ set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA ${DEBIAN_EXTRA_FILES})
