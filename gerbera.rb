@@ -24,8 +24,7 @@ class Gerbera < Formula
   depends_on "spdlog"
   depends_on "taglib"
 
-  # Embedded (__END__) patches are declared like so:
-  # patch :DATA
+  # Embedded (__END__) patches:
   patch :p1, :DATA
 
   def install
@@ -38,7 +37,7 @@ class Gerbera < Formula
 
       args = std_cmake_args
       args << "--preset=macos"
-      args << "-DWITH_ICU=NO"
+      args << "-DWITH_ICU=YES"
       args << "-DWITH_TESTS=NO"
       args << "-DCMAKE_FIND_FRAMEWORK=LAST"
       args << "-DCMAKE_CXX_FLAGS=\"-stdlib=libc++\""
