@@ -23,8 +23,8 @@ class Gerbera < Formula
   depends_on "taglib"
 
   def install
-    ENV["PKG_CONFIG_PATH"] = "ENV["PKG_CONFIG_PATH"]:/opt/homebrew/opt/libupnp/lib/pkgconfig"
-    ENV["CMAKE_PREFIX_PATH"] = "ENV["CMAKE_PREFIX_PATH"]:/opt/homebrew/opt/libupnp"
+    ENV["PKG_CONFIG_PATH"] = "ENV[\"PKG_CONFIG_PATH\"]:/opt/homebrew/opt/libupnp/lib/pkgconfig"
+    ENV["CMAKE_PREFIX_PATH"] = "ENV[\"CMAKE_PREFIX_PATH\"]:/opt/homebrew/opt/libupnp"
     mkdir "build" do
       args = std_cmake_args
       args << "--preset=macos"
