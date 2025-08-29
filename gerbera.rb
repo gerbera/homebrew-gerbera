@@ -23,6 +23,8 @@ class Gerbera < Formula
   depends_on "taglib"
 
   def install
+    export PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:/opt/homebrew/opt/libupnp/lib/pkgconfig"
+    export CMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}:/opt/homebrew/opt/libupnp"
     mkdir "build" do
       args = std_cmake_args
       args << "--preset=macos"
@@ -31,8 +33,6 @@ class Gerbera < Formula
       args << "-DCMAKE_CXX_FLAGS=\"-stdlib=libc++\""
       args << "-DCMAKE_CXX_COMPILER=/usr/bin/clang++"
       args << "-DCMAKE_INSTALL_PREFIX:PATH=#{prefix}"
-      args << "-DCMAKE_PREFIX_PATH=/opt/homebrew/opt/libupnp"
-      args << "-DPKG_CONFIG_PATH=${PKG_CONFIG_PATH}:/opt/homebrew/opt/libupnp/lib/pkgconfig"
 
       system "cmake", "..", *args
       system "make", "install"
