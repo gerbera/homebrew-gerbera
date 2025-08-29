@@ -31,7 +31,7 @@ class Gerbera < Formula
     system "which", "-a", "pkg-config"
     system "/opt/homebrew/Library/Homebrew/shims/mac/super/pkg-config", "--list-all"
     system "/opt/homebrew/Library/Homebrew/shims/mac/super/pkg-config", "--libs", "libupnp"
-    system "ls", "-l", "$(pkg-config)"
+    system "/opt/homebrew/Library/Homebrew/shims/mac/super/pkg-config", "--cflags", "libupnp"
     mkdir "build" do
       grb_pkg_config_path = ENV["PKG_CONFIG_PATH"]
       grb_cmake_prefix_path = ENV["CMAKE_PREFIX_PATH"]
