@@ -28,8 +28,6 @@ class Gerbera < Formula
   patch :p1, :DATA
 
   def install
-    system "which", "-a", "pkg-config"
-    system "/opt/homebrew/Library/Homebrew/shims/mac/super/pkg-config", "--list-all"
     system "/opt/homebrew/Library/Homebrew/shims/mac/super/pkg-config", "--libs", "libupnp"
     system "/opt/homebrew/Library/Homebrew/shims/mac/super/pkg-config", "--cflags", "libupnp"
     mkdir "build" do
