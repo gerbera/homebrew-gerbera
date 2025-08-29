@@ -5,6 +5,7 @@ class Gerbera < Formula
   sha256 "6a7ed1c73bd86bdddd76bcb6c4bcd2e42788a20eb1f3165e0ea9f456abccd3ed"
 
   depends_on "cmake" => :build
+  depends_on "pkg-config" => :build
   depends_on "duktape"
   depends_on "exiv2"
   depends_on "ffmpeg"
@@ -28,7 +29,8 @@ class Gerbera < Formula
 
   def install
     system "which", "-a", "pkg-config"
-    system "/opt/homebrew/Library/Homebrew/shims/mac/super/pkg-config"
+    system "/opt/homebrew/Library/Homebrew/shims/mac/super/pkg-config", "--list-all"
+    system "/opt/homebrew/Library/Homebrew/shims/mac/super/pkg-config", "--libs", "libupnp"
     system "ls", "-l", "$(pkg-config)"
     mkdir "build" do
       grb_pkg_config_path = ENV["PKG_CONFIG_PATH"]
