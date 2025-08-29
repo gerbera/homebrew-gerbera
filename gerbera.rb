@@ -31,6 +31,7 @@ class Gerbera < Formula
       grb_pkg_config_path = ENV["PKG_CONFIG_PATH"]
       grb_cmake_prefix_path = ENV["CMAKE_PREFIX_PATH"]
       ENV["CMAKE_PKG_CONFIG_PC_LIB_DIRS"] = "/opt/homebrew/Cellar/libupnp/lib/pkgconfig:#{grb_pkg_config_path}"
+      ENV["PKG_CONFIG_PATH"] = "/opt/homebrew/Cellar/libupnp/lib/pkgconfig:#{grb_pkg_config_path}"
       ENV["CMAKE_PREFIX_PATH"] = "/opt/homebrew/Cellar/libupnp:#{grb_cmake_prefix_path}"
 
       args = std_cmake_args
