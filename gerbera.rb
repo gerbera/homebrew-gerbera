@@ -57,7 +57,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 89d4dfe9f..b05467b3d 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -515,6 +515,18 @@ if (WITH_NPUPNP)
+@@ -515,6 +515,20 @@ if (WITH_NPUPNP)
      target_link_libraries(libgerbera PUBLIC NPUPNP::NPUPNP)
  else()
      set(REQ_UPNP_VERSION 1.14.6)
@@ -73,6 +73,8 @@ index 89d4dfe9f..b05467b3d 100644
 +                list(APPEND CMAKE_PKG_CONFIG_PC_LIB_DIRS "/usr/local/opt/libupnp/lib/pkgconfig")
 +        endif()
 +    endif()
++    MESSAGE("CMAKE_PREFIX_PATH: " ${CMAKE_PREFIX_PATH})
++    MESSAGE("CMAKE_PKG_CONFIG_PC_LIB_DIRS: " ${CMAKE_PKG_CONFIG_PC_LIB_DIRS})
      # LibUPnP official target since 1.16 (Lib version 18)
      # This will prefer the provided UPNPConfig.cmake if found, if not, it will fall back our FindUPNP.cmake
      find_package(UPNP ${REQ_UPNP_VERSION} QUIET)
