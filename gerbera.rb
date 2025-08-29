@@ -27,7 +27,7 @@ class Gerbera < Formula
   patch :p1, :DATA
 
   def install
-    system "which pkg-config"
+    system "which", "pkg-config"
     system "/opt/local/bin/pkg-config"
     system "/opt/homebrew/bin/pkg-config"
     system "ls", "-l", "$(which pkg-config)"
