@@ -27,7 +27,7 @@ class Gerbera < Formula
   patch :p1, :DATA
 
   def install
-    system "ls" "-l" "$(which pkg-config)"
+    system "ls", "-l", "$(which pkg-config)"
     mkdir "build" do
       grb_pkg_config_path = ENV["PKG_CONFIG_PATH"]
       grb_cmake_prefix_path = ENV["CMAKE_PREFIX_PATH"]
