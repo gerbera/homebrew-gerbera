@@ -14,11 +14,11 @@ class Gerbera < Formula
   depends_on "libmatroska"
   depends_on "libupnp"
   depends_on "lzlib"
-  depends_on "ossp-uuid"
   depends_on "jsoncpp"
   depends_on "icu4c"
-  depends_on "pugixml"
+  depends_on "ossp-uuid"
   depends_on "fmt"
+  depends_on "pugixml"
   depends_on "spdlog"
   depends_on "taglib"
 
