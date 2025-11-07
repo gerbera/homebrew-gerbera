@@ -50,5 +50,3 @@ class Gerbera < Formula
     assert_match(/Gerbera UPnP Server/, shell_output("#{bin}/gerbera --compile-info").strip)
   end
 end
-
-__END__
