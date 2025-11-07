@@ -1,8 +1,8 @@
 class Gerbera < Formula
   desc "UPnP Media Server for 2025"
   homepage "https://gerbera.io"
-  url "https://github.com/gerbera/gerbera/archive/refs/tags/v2.6.1.tar.gz"
-  sha256 "6a7ed1c73bd86bdddd76bcb6c4bcd2e42788a20eb1f3165e0ea9f456abccd3ed"
+  url "https://github.com/gerbera/gerbera/archive/refs/tags/v3.0.0.tar.gz"
+  sha256 "d7934a2318f45330deb2ed1b589bd37b49f42f7929a9d11650349d17c998f920"
 
   depends_on "cmake" => :build
   depends_on "pkg-config" => :build
@@ -23,9 +23,6 @@ class Gerbera < Formula
   depends_on "pugixml"
   depends_on "spdlog"
   depends_on "taglib"
-
-  # Embedded (__END__) patches:
-  patch :p1, :DATA
 
   def install
     mkdir "build" do
@@ -53,73 +50,3 @@ class Gerbera < Formula
     assert_match(/Gerbera UPnP Server/, shell_output("#{bin}/gerbera --compile-info").strip)
   end
 end
-
-__END__
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 89d4dfe9f..b05467b3d 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -515,6 +515,20 @@ if (WITH_NPUPNP)
-     target_link_libraries(libgerbera PUBLIC NPUPNP::NPUPNP)
- else()
-     set(REQ_UPNP_VERSION 1.14.6)
-+    if(CMAKE_SYSTEM_NAME MATCHES "Darwin")
-+        # Determine processor type as there are different paths for "brew" installation.
-+        if (CMAKE_SYSTEM_PROCESSOR MATCHES "arm64") # "arm64" -> Apple Silicon
-+                set(ENV{PKG_CONFIG_PATH} "$ENV{PKG_CONFIG_PATH}:/opt/homebrew/Cellar/libupnp/lib/pkgconfig")
-+                list(APPEND CMAKE_PREFIX_PATH "/opt/homebrew/Cellar/libupnp")
-+                list(APPEND CMAKE_PKG_CONFIG_PC_LIB_DIRS "/opt/homebrew/Cellar/libupnp/lib/pkgconfig")
-+        else() # "x86_64" -> Intel (CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64")
-+                set(ENV{PKG_CONFIG_PATH} "$ENV{PKG_CONFIG_PATH}:/usr/local/Cellar/libupnp/lib/pkgconfig")
-+                list(APPEND CMAKE_PREFIX_PATH "/usr/local/Cellar/libupnp")
-+                list(APPEND CMAKE_PKG_CONFIG_PC_LIB_DIRS "/usr/local/Cellar/libupnp/lib/pkgconfig")
-+        endif()
-+    endif()
-+    MESSAGE("CMAKE_PREFIX_PATH: " ${CMAKE_PREFIX_PATH})
-+    MESSAGE("CMAKE_PKG_CONFIG_PC_LIB_DIRS: " ${CMAKE_PKG_CONFIG_PC_LIB_DIRS})
-     # LibUPnP official target since 1.16 (Lib version 18)
-     # This will prefer the provided UPNPConfig.cmake if found, if not, it will fall back our FindUPNP.cmake
-     find_package(UPNP ${REQ_UPNP_VERSION} QUIET)
-@@ -756,10 +768,19 @@
- #
- if(WITH_ICU)
-     if(CMAKE_SYSTEM_NAME MATCHES "Darwin")
--         set(ENV{PKG_CONFIG_PATH} "$ENV{PKG_CONFIG_PATH}:/usr/local/opt/icu4c/lib/pkgconfig")
-+        # Determine processor type as there are different paths for "brew" installation.
-+        if (CMAKE_SYSTEM_PROCESSOR MATCHES "arm64") # "arm64" -> Apple Silicon
-+                set(ENV{PKG_CONFIG_PATH} "$ENV{PKG_CONFIG_PATH}:/opt/homebrew/opt/icu4c/lib/pkgconfig")
-+                list(APPEND CMAKE_PREFIX_PATH "/opt/homebrew/opt/icu4c")
-+                list(APPEND CMAKE_PKG_CONFIG_PC_LIB_DIRS "/opt/homebrew/opt/icu4c/lib/pkgconfig")
-+        else() # "x86_64" -> Intel (CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64")
-+                set(ENV{PKG_CONFIG_PATH} "$ENV{PKG_CONFIG_PATH}:/usr/local/opt/icu4c/lib/pkgconfig")
-+                list(APPEND CMAKE_PREFIX_PATH "/usr/local/opt/icu4c")
-+                list(APPEND CMAKE_PKG_CONFIG_PC_LIB_DIRS "/usr/local/opt/icu4c/lib/pkgconfig")
-+        endif()
-     endif()
-     find_package(ICU REQUIRED COMPONENTS i18n io uc)
--    # pkg_check_modules(ICU REQUIRED icu-i18n icu-uc icu-io)
-+    target_include_directories(libgerbera PUBLIC ${ICU_INCLUDE_DIRS})
-     target_link_libraries(libgerbera PUBLIC ${ICU_LIBRARIES})
-     target_compile_definitions(libgerbera PUBLIC HAVE_ICU)
- endif()
-@@ -829,13 +847,15 @@ if(BUILD_CHANGELOG)
-     )
- endif()
-
--set(BASH_COMPLETION_DIR "/usr/share/bash-completion/completions")
-+if(NOT CMAKE_SYSTEM_NAME MATCHES "Darwin")
-+    set(BASH_COMPLETION_DIR "/usr/share/bash-completion/completions")
-
--install(FILES
--        scripts/gerbera-completion.sh
--        DESTINATION "${BASH_COMPLETION_DIR}"
--        RENAME gerbera
--)
-+    install(FILES
-+            scripts/gerbera-completion.sh
-+            DESTINATION "${BASH_COMPLETION_DIR}"
-+            RENAME gerbera
-+    )
-+endif()
-
- set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA ${DEBIAN_EXTRA_FILES})
